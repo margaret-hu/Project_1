@@ -24,6 +24,10 @@ public class AddressBookApplication {
         System.out.println("============================================================");
         TestAddressEntry aetest = new TestAddressEntry();
         aetest.runTest();
+        System.out.println("Testing AddressBook");
+        System.out.println("============================================================");
+        TestAddressBook abtest = new TestAddressBook();
+        abtest.runTest();
     }
 
     private static void initAddressBookExercise(AddressBook a) {
