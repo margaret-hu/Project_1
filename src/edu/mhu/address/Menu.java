@@ -1,5 +1,7 @@
 package edu.mhu.address;
 
+import java.util.Scanner;
+
 public class Menu {
     /**
      * prompt_FirstName  generates a standard output prompt for the First Name to be entered
