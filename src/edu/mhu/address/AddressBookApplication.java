@@ -10,13 +10,22 @@ public class AddressBookApplication {
     private static AddressBook ab = new AddressBook();
 
     public static void main(String[] args) throws IOException {
+        testIndividualClass();
         initAddressBookExercise(ab);
 
-        init("/home/margaret/AddressInputDataFile.txt", ab);
+        //init("/home/margaret/AddressInputDataFile.txt", ab);
 
         // Call a listing on ab to see the new entries generated from init
         ab.list();
     }
+
+    private static void testIndividualClass() {
+        System.out.println("Testing AddressEntry");
+        System.out.println("============================================================");
+        TestAddressEntry aetest = new TestAddressEntry();
+        aetest.runTest();
+    }
+
     private static void initAddressBookExercise(AddressBook a) {
         System.out.println("Will add 2 entry into address book a");
 
@@ -48,7 +57,6 @@ public class AddressBookApplication {
         try {
             file = new FileInputStream(filename);
             Scanner scanner = new Scanner(file);
-            int count = 0;
 
             // Create while loop to read file
             while (scanner.hasNext()) {
