@@ -27,7 +27,7 @@ public class AddressEntry {
     }
 
     /**
-     * Parameterized constructor
+     * The constructor which builds the entry from the given parameters.
      * @param firstName
      * @param lastName
      * @param street
@@ -48,14 +48,16 @@ public class AddressEntry {
         this.email = email;
     }
 
+    /**
+     * Prints out the components of the address entry in a nicely formatted way.
+     * @return A formatted String.
+     */
+    @Override
     public String toString() {
         String str = "\n";
-        str += "\t" + firstName + "\n";
-        str += "\t" + lastName + "\n";
+        str += "\t" + firstName + " " + lastName + "\n";
         str += "\t" + street + "\n";
-        str += "\t" + city + "\n";
-        str += "\t" + state + "\n";
-        str += "\t" + zip.intValue() + "\n";
+        str += "\t" + city + ", " + state + " " + zip.intValue() + "\n";
         str += "\t" + phone + "\n";
         str += "\t" + email + "\n";
         return str;
