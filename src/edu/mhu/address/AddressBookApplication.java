@@ -11,12 +11,14 @@ public class AddressBookApplication {
 
     public static void main(String[] args) throws IOException {
         testIndividualClass();
+        /*
         initAddressBookExercise(ab);
 
         //init("/home/margaret/AddressInputDataFile.txt", ab);
 
         // Call a listing on ab to see the new entries generated from init
         ab.list();
+         */
     }
 
     private static void testIndividualClass() {
