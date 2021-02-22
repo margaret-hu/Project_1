@@ -10,7 +10,8 @@ public class AddressBookApplication {
     private static AddressBook ab = new AddressBook();
 
     public static void main(String[] args) throws IOException {
-        testIndividualClass();
+        //testIndividualClass();
+        runInteractive();
         /*
         initAddressBookExercise(ab);
 
@@ -19,6 +20,50 @@ public class AddressBookApplication {
         // Call a listing on ab to see the new entries generated from init
         ab.list();
          */
+    }
+
+    private static void runInteractive() throws IOException {
+        Menu menu = new Menu();
+        Scanner input = new Scanner(System.in);
+        while (true) {
+            menu.display();
+            String choice = input.nextLine();
+            if (choice.equals("a")) {
+                System.out.println("> a");
+                System.out.println("Enter in FileName:");
+                String filename = input.nextLine();
+                System.out.println("> " + filename);
+                ab.readFromFile(filename);
+            } else if (choice.equals("b")) {
+                System.out.println("> b");
+                String firstName = Menu.prompt_FirstName();
+                System.out.println("> " + firstName);
+                String lastName = Menu.prompt_LastName();
+                System.out.println("> " + lastName);
+                String street = Menu.prompt_Street();
+                System.out.println("> " + street);
+                String city = Menu.prompt_City();
+                System.out.println("> " + city);
+                String state = Menu.prompt_State();
+                System.out.println("> " + state);
+                int zip = Menu.prompt_Zip();
+                System.out.println("> " + zip);
+                String phone = Menu.prompt_Telephone();
+                System.out.println("> " + phone);
+                String email = Menu.prompt_Email();
+                System.out.println("> " + email);
+            } else if (choice.equals("c")) {
+                ;
+            } else if (choice.equals("d")) {
+                ;
+            } else if (choice.equals("e")) {
+                ;
+            } else if (choice.equals("f")) {
+                break;
+            } else {
+                System.out.println("Error: " + choice + " is not a valid selection.");
+            }
+        }
     }
 
     private static void testIndividualClass() {
@@ -50,54 +95,5 @@ public class AddressBookApplication {
         a.add(e1);
         a.add(e2);
         //a.list();
-    }
-
-    /**
-     *
-     * @param filename The file to be read.
-     * @param ab The class variable to pass in.
-     * @throws IOException
-     */
-    public static void init(String filename, AddressBook ab) throws IOException {
-        FileInputStream file = null;
-        try {
-            file = new FileInputStream(filename);
-            Scanner scanner = new Scanner(file);
-
-            // Create while loop to read file
-            while (scanner.hasNext()) {
-                // Read in first name
-                String fn = scanner.nextLine();
-
-                // Read in last name
-                String ln = scanner.nextLine();
-
-                // Read in street
-                String street = scanner.nextLine();
-
-                // Read in city
-                String c = scanner.nextLine();
-
-                // Read in state
-                String state = scanner.nextLine();
-
-                // Read in zip
-                Integer z = Integer.valueOf(scanner.nextLine());
-
-                // Read in email
-                String e = scanner.nextLine();
-
-                // Read in phone
-                String p = scanner.nextLine();
-
-                // Create AddressEntry using read in information and add it to the AddressBook
-                AddressEntry entry = new AddressEntry(fn, ln, street, c, state, z, p, e);
-                ab.add(entry);
-            } // end of while loop
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (file != null) file.close();
-        }
     }
 }

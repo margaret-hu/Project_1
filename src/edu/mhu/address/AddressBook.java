@@ -1,15 +1,15 @@
 package edu.mhu.address;
 
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.*;
 
 public class AddressBook {
     /**
      * The data structure that will hold the data for the address book.
      */
-    private TreeMap<String, TreeSet<AddressEntry>> addressDatabase;
+    private final TreeMap<String, TreeSet<AddressEntry>> addressDatabase;
 
     /**
      * Constructor for AddressBook. Creates an empty TreeMap.
@@ -43,7 +43,7 @@ public class AddressBook {
             set = addressDatabase.get(lastName);
         } else {
             // Create a new TreeSet to contain the entry.
-            set = new TreeSet<>((a,b) -> a.getFirstName().compareTo(b.getFirstName()));
+            set = new TreeSet<>(Comparator.comparing(AddressEntry::getFirstName));
             addressDatabase.put(lastName, set);
         }
         set.add(e);
@@ -79,6 +79,53 @@ public class AddressBook {
             ans[i++] = e;
         }
         return ans;
+    }
+
+    /**
+     *
+     * @param filename The file to be read.
+     */
+    public void readFromFile(String filename) throws IOException {
+        FileInputStream file = null;
+        try {
+            file = new FileInputStream(filename);
+            Scanner scanner = new Scanner(file);
+
+            // Create while loop to read file
+            while (scanner.hasNext()) {
+                // Read in first name
+                String fn = scanner.nextLine();
+
+                // Read in last name
+                String ln = scanner.nextLine();
+
+                // Read in street
+                String street = scanner.nextLine();
+
+                // Read in city
+                String c = scanner.nextLine();
+
+                // Read in state
+                String state = scanner.nextLine();
+
+                // Read in zip
+                Integer z = Integer.valueOf(scanner.nextLine());
+
+                // Read in email
+                String e = scanner.nextLine();
+
+                // Read in phone
+                String p = scanner.nextLine();
+
+                // Create AddressEntry using read in information and add it to the AddressBook
+                AddressEntry entry = new AddressEntry(fn, ln, street, c, state, z, p, e);
+                this.add(entry);
+            } // end of while loop
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (file != null) file.close();
+        }
     }
 
     /**
