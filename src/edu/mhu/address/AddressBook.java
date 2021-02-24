@@ -1,10 +1,15 @@
 package edu.mhu.address;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
+/**
+ * @author Margaret Hu
+ * @since February 2021
+ *
+ * This class represents and contains a possibly ever growing and/or shrinking "list" of AddressEntries.
+ * It allows for various operations such as search/find, addition and removal of AddressEntries.
+ */
 public class AddressBook {
     /**
      * The data structure that will hold the data for the address book.
@@ -31,6 +36,39 @@ public class AddressBook {
     }
 
     /**
+     * Removes selected entry from AddressBook.
+     * @param entry is the list of candidates for removal
+     */
+    public void remove(AddressEntry entry) {
+        if (entry == null) return;
+        String lastName = entry.getLastName();
+        if (!addressDatabase.containsKey(lastName)) return;
+        TreeSet<AddressEntry> set = addressDatabase.get(lastName);
+        if (!set.contains(entry)) return;
+        set.remove(entry);
+        if (set.size() == 0) addressDatabase.remove(lastName);
+    }
+
+    /**
+     * Gives an array of possible entries to remove
+     * @param lastName is the last name (or some initial consecutive characters)
+     *                 of the person contained in the AddressEntry
+     * @return a list of candidates for removal
+     */
+    public AddressEntry[] remove(String lastName) {
+        if (!addressDatabase.containsKey(lastName)) return null;
+        TreeSet<AddressEntry> set = addressDatabase.get(lastName);
+        int size = set.size();
+        AddressEntry[] ans = new AddressEntry[size];
+        int i = 0;
+        // Go through each AddressEntry with the same last name
+        for (AddressEntry e : set) {
+            ans[i++] = e;
+        }
+        return ans;
+    }
+
+    /**
      * Add an entry to AddressBook.
      * @param e is an instance of AddressEntry to add to the AddressBook
      */
@@ -50,40 +88,8 @@ public class AddressBook {
     }
 
     /**
-     * Removes selected entries from AddressBook.
-     * @param entry
-     */
-    public void remove(AddressEntry entry) {
-        if (entry == null) return;
-        String lastName = entry.getLastName();
-        if (!addressDatabase.containsKey(lastName)) return;
-        TreeSet<AddressEntry> set = addressDatabase.get(lastName);
-        if (!set.contains(entry)) return;
-        set.remove(entry);
-        if (set.size() == 0) addressDatabase.remove(lastName);
-    }
-
-    /**
-     * Gives an array of entries to chose
-     * @param lastName
-     * @return a list of candidates for removal
-     */
-    public AddressEntry[] remove(String lastName) {
-        if (!addressDatabase.containsKey(lastName)) return null;
-        TreeSet<AddressEntry> set = addressDatabase.get(lastName);
-        int size = set.size();
-        AddressEntry[] ans = new AddressEntry[size];
-        int i = 0;
-        // Go through each AddressEntry with the same last name
-        for (AddressEntry e : set) {
-            ans[i++] = e;
-        }
-        return ans;
-    }
-
-    /**
-     *
-     * @param filename The file to be read.
+     * Reads in address entries from a text file and adds them to the AddressBook
+     * @param filename is a string which is the name of a text file that contains address Entry data
      */
     public void readFromFile(String filename) throws IOException {
         FileInputStream file = null;
@@ -93,29 +99,14 @@ public class AddressBook {
 
             // Create while loop to read file
             while (scanner.hasNext()) {
-                // Read in first name
-                String fn = scanner.nextLine();
-
-                // Read in last name
-                String ln = scanner.nextLine();
-
-                // Read in street
-                String street = scanner.nextLine();
-
-                // Read in city
-                String c = scanner.nextLine();
-
-                // Read in state
-                String state = scanner.nextLine();
-
-                // Read in zip
-                Integer z = Integer.valueOf(scanner.nextLine());
-
-                // Read in email
-                String e = scanner.nextLine();
-
-                // Read in phone
-                String p = scanner.nextLine();
+                String fn = scanner.nextLine(); // Read in first name
+                String ln = scanner.nextLine(); // Read in last name
+                String street = scanner.nextLine(); // Read in street
+                String c = scanner.nextLine(); // Read in city
+                String state = scanner.nextLine(); // Read in state
+                Integer z = Integer.valueOf(scanner.nextLine()); // Read in zip
+                String e = scanner.nextLine(); // Read in email
+                String p = scanner.nextLine(); // Read in phone
 
                 // Create AddressEntry using read in information and add it to the AddressBook
                 AddressEntry entry = new AddressEntry(fn, ln, street, c, state, z, p, e);
@@ -129,24 +120,25 @@ public class AddressBook {
     }
 
     /**
-     *
-     * @param startOf_lastName is a string which contains either a full last name or the first consecutive characters
-     *                         of a last name in an AddressEntry
+     * Displays one or multiple address entries from the AddressBook
+     * @param startOf_lastName is a string which contains either a full last name
+     *                         (or some initial consecutive characters) of a last name in an AddressEntry
      */
     public void find(String startOf_lastName) {
         SortedMap<String, TreeSet<AddressEntry>> subSection;
-        subSection = addressDatabase.subMap(startOf_lastName, startOf_lastName + "~"/*last char*/);
+        subSection = addressDatabase.subMap(startOf_lastName, startOf_lastName + "~" /* last char */);
         if (subSection.size() > 0) {
-            System.out.println("The following " + subSection.size() + " entries were found in the address book " +
-                    "for a last name starting with \"" + startOf_lastName + "\"");
-            int i = 1;
+            int i = 0;
+            String temp = "";
+            // Computes the total number of Address entries in subSection
             for(Map.Entry<String, TreeSet<AddressEntry>> iter : subSection.entrySet()) {
                 for(AddressEntry e : iter.getValue()) {
-                    System.out.println(i + ": " + e);
-                    i++;
+                    temp += ++i + ": " + e;
                 }
             }
-            return;
+            System.out.println("The following " + i + " entries were found in the address book " +
+                    "for a last name starting with \"" + startOf_lastName + "\"");
+            System.out.println(temp);
         }
         System.out.println("There were no entries were found in the address book " +
                 "for a last name starting with \"" + startOf_lastName + "\"");
