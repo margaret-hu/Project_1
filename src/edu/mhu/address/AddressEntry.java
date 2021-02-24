@@ -60,7 +60,7 @@ public class AddressEntry {
      */
     @Override
     public String toString() {
-        String str = "\n";
+        String str = "";
         str += "\t" + firstName + " " + lastName + "\n";
         str += "\t" + street + "\n";
         str += "\t" + city + ", " + state + " " + zip.intValue() + "\n";

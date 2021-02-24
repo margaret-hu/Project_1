@@ -6,8 +6,8 @@ package edu.mhu.address;
  *
  * This class is used to test the AddressEntry class.
  */
-public class TestAddressEntry {
-    public TestAddressEntry() {}
+public class AddressEntryTest {
+    public AddressEntryTest() {}
 
     private void printFields(AddressEntry entry) {
         System.out.println(" First Name: " + entry.getFirstName());

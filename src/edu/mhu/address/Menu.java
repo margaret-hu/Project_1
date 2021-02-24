@@ -24,7 +24,7 @@ public class Menu {
     public static String prompt_FirstName()
     {
         System.out.println("First Name:");
-        //System.out.print("> ");
+        System.out.print("> ");
         return in.nextLine();
     }
 
@@ -35,6 +35,7 @@ public class Menu {
     public static String prompt_LastName()
     {
         System.out.println("Last Name:");
+        System.out.print("> ");
         return in.nextLine();
     }
 
@@ -45,6 +46,7 @@ public class Menu {
     public static String prompt_Street()
     {
         System.out.println("Street:");
+        System.out.print("> ");
         return in.nextLine();
     }
 
@@ -55,6 +57,7 @@ public class Menu {
     public static String prompt_City()
     {
         System.out.println("City:");
+        System.out.print("> ");
         return in.nextLine();
     }
 
@@ -65,6 +68,7 @@ public class Menu {
     public static String prompt_State()
     {
         System.out.println("State:");
+        System.out.print("> ");
         return in.nextLine();
     }
 
@@ -77,6 +81,7 @@ public class Menu {
         try {
             Scanner Keyboard = new Scanner(System.in);
             System.out.println("Zip: ");
+            System.out.print("> ");
             return Keyboard.nextInt();
         }
         catch(InputMismatchException e) {
@@ -92,6 +97,7 @@ public class Menu {
     public static String prompt_Telephone()
     {
         System.out.println("Telephone:");
+        System.out.print("> ");
         return in.nextLine();
     }
 
@@ -102,6 +108,7 @@ public class Menu {
     public static String prompt_Email()
     {
         System.out.println("Email:");
+        System.out.print("> ");
         return in.nextLine();
     }
 
@@ -110,23 +117,9 @@ public class Menu {
      * @return  an AddressEntry which contains information specified by user
      */
     public static AddressEntry prompt_All() {
-        String firstName = prompt_FirstName();
-        System.out.println("> " + firstName);
-        String lastName = prompt_LastName();
-        System.out.println("> " + lastName);
-        String street = prompt_Street();
-        System.out.println("> " + street);
-        String city = prompt_City();
-        System.out.println("> " + city);
-        String state = prompt_State();
-        System.out.println("> " + state);
-        int zip = prompt_Zip();
-        System.out.println("> " + zip);
-        String phone = prompt_Telephone();
-        System.out.println("> " + phone);
-        String email = prompt_Email();
-        System.out.println("> " + email);
-        return new AddressEntry(firstName, lastName, street, city, state, zip, phone, email);
+        return new AddressEntry(prompt_FirstName(), prompt_LastName(), prompt_Street(),
+                prompt_City(), prompt_State(), prompt_Zip(), prompt_Email(),
+                prompt_Telephone());
     }
 
     /**

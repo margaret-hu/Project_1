@@ -20,7 +20,7 @@ public class AddressBook {
      * Constructor for AddressBook. Creates an empty TreeMap.
      */
     public AddressBook() {
-        System.out.println("Constructing AddressBook");
+        //System.out.println("Constructing AddressBook");
         addressDatabase = new TreeMap<>();
     }
 
