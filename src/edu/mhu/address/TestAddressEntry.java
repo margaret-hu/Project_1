@@ -19,6 +19,7 @@ public class TestAddressEntry {
         System.out.println(" Email: " + entry.getEmail());
         System.out.println(" Phone: " + entry.getPhone());
     }
+
     public void runTest() {
         String[] test1 = {"Lynne", "Grewe", "123 3rd Ave", "Hayward", "CA", "28666", "lynne.grewe@csueastbay.edu", "510-885-4167"};
         String[] test2 = {"Butch", "Grewe", "Bay Avenue", "Capitoal", "CA", "99999", "bg@gmail.com", "415-389-1239"};
