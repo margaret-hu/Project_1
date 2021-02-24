@@ -3,6 +3,12 @@ package edu.mhu.address;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * @author Margaret Hu
+ * @since February 2021
+ *
+ * This class is used to display menu options to the user.
+ */
 public class Menu {
     /**
      * Gets input from the user
@@ -18,6 +24,7 @@ public class Menu {
     public static String prompt_FirstName()
     {
         System.out.println("First Name:");
+        //System.out.print("> ");
         return in.nextLine();
     }
 
@@ -96,6 +103,30 @@ public class Menu {
     {
         System.out.println("Email:");
         return in.nextLine();
+    }
+
+    /**
+     * prompt_All  instantiates and returns a new AddressEntry with values that are specified by the user with calls to all of the prompt methods
+     * @return  an AddressEntry which contains information specified by user
+     */
+    public static AddressEntry prompt_All() {
+        String firstName = prompt_FirstName();
+        System.out.println("> " + firstName);
+        String lastName = prompt_LastName();
+        System.out.println("> " + lastName);
+        String street = prompt_Street();
+        System.out.println("> " + street);
+        String city = prompt_City();
+        System.out.println("> " + city);
+        String state = prompt_State();
+        System.out.println("> " + state);
+        int zip = prompt_Zip();
+        System.out.println("> " + zip);
+        String phone = prompt_Telephone();
+        System.out.println("> " + phone);
+        String email = prompt_Email();
+        System.out.println("> " + email);
+        return new AddressEntry(firstName, lastName, street, city, state, zip, phone, email);
     }
 
     /**
