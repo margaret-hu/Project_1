@@ -1,9 +1,14 @@
 package edu.mhu.address;
 
-import java.util.Locale;
-
+/**
+ * @author Margaret Hu
+ * @since February 2021
+ *
+ * This class is used to test the AddressEntry class.
+ */
 public class TestAddressEntry {
     public TestAddressEntry() {}
+
     private void printFields(AddressEntry entry) {
         System.out.println(" First Name: " + entry.getFirstName());
         System.out.println(" Last Name: " + entry.getLastName());
@@ -42,7 +47,6 @@ public class TestAddressEntry {
             entry.setEmail(e.toUpperCase());
             entry.setPhone(p.toUpperCase());
             printFields(entry);
-
         }
     }
 }
