@@ -1,10 +1,16 @@
 package edu.mhu.address;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static edu.mhu.address.Menu.prompt_All;
+
+/**
+ * @author Margaret Hu
+ * @since February 2021
+ *
+ * This class is used to add, delete, and query data from an address book.
+ */
 public class AddressBookApplication {
     // Class variable
     private static AddressBook ab = new AddressBook();
@@ -15,13 +21,15 @@ public class AddressBookApplication {
         /*
         initAddressBookExercise(ab);
 
-        //init("/home/margaret/AddressInputDataFile.txt", ab);
-
         // Call a listing on ab to see the new entries generated from init
         ab.list();
          */
     }
 
+    /**
+     * Prompts user for various commands to modify and display the AddressBook
+     * @throws IOException
+     */
     private static void runInteractive() throws IOException {
         Menu menu = new Menu();
         Scanner input = new Scanner(System.in);
@@ -36,28 +44,41 @@ public class AddressBookApplication {
                 ab.readFromFile(filename);
             } else if (choice.equals("b")) {
                 System.out.println("> b");
-                String firstName = Menu.prompt_FirstName();
-                System.out.println("> " + firstName);
-                String lastName = Menu.prompt_LastName();
-                System.out.println("> " + lastName);
-                String street = Menu.prompt_Street();
-                System.out.println("> " + street);
-                String city = Menu.prompt_City();
-                System.out.println("> " + city);
-                String state = Menu.prompt_State();
-                System.out.println("> " + state);
-                int zip = Menu.prompt_Zip();
-                System.out.println("> " + zip);
-                String phone = Menu.prompt_Telephone();
-                System.out.println("> " + phone);
-                String email = Menu.prompt_Email();
-                System.out.println("> " + email);
+                AddressEntry entry = prompt_All();
+                ab.add(entry);
             } else if (choice.equals("c")) {
-                ;
+                System.out.println("> c");
+                System.out.println("Enter in Last Name of contact to remove:");
+                String lastName = input.nextLine();
+                AddressEntry[] choices = ab.remove(lastName);
+                System.out.println("The following " + choices.length +
+                        " entries were found in the address book, select number\nof entry you wish to remove:");
+                int i = 1;
+                for (AddressEntry e : choices) {
+                    System.out.println(i + ": " + e);
+                    i++;
+                }
+                int num = Integer.valueOf(input.nextLine());
+                System.out.println("> " + num);
+                System.out.println("Hit y to remove the following entry or n to return to main menu:");
+                AddressEntry e = choices[num-1];
+                System.out.println(e);
+                String ans = input.nextLine();
+                System.out.println("> " + ans);
+                if (ans.equals("y")) {
+                    System.out.println("You have successfully removed the " +
+                            e.getFirstName() + " " + e.getLastName() + " contact");
+                    ab.remove(e);
+                }
             } else if (choice.equals("d")) {
-                ;
+                System.out.println("> d");
+                System.out.println("Enter in all or the beginning of the Last Name of the contact you wish to find:");
+                String ans = input.nextLine();
+                System.out.println("> " + ans);
+                ab.find(ans);
             } else if (choice.equals("e")) {
-                ;
+                System.out.println("> e");
+                ab.list();
             } else if (choice.equals("f")) {
                 break;
             } else {
