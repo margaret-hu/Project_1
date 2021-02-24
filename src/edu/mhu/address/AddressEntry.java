@@ -1,5 +1,11 @@
 package edu.mhu.address;
 
+/**
+ * @author Margaret Hu
+ * @since February 2021
+ *
+ * This class represents a single Address/Contact information entry in the AddressBook.
+ */
 public class AddressEntry {
     // Instance variables
     private String firstName;
@@ -50,7 +56,7 @@ public class AddressEntry {
 
     /**
      * Prints out the components of the address entry in a nicely formatted way.
-     * @return A formatted String.
+     * @return a formatted String
      */
     @Override
     public String toString() {
