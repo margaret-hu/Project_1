@@ -96,7 +96,7 @@ public class Menu {
      */
     public static String prompt_Phone()
     {
-        System.out.println("Telephone:");
+        System.out.println("Phone:");
         System.out.print("> ");
         return in.nextLine();
     }
