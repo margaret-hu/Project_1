@@ -94,7 +94,7 @@ public class Menu {
      * prompt_Telephone  generates a standard output prompt for the Telephone to be entered
      * @return  a String which represents a person's in an AddressEntry
      */
-    public static String prompt_Telephone()
+    public static String prompt_Phone()
     {
         System.out.println("Telephone:");
         System.out.print("> ");
@@ -118,7 +118,7 @@ public class Menu {
      */
     public static AddressEntry prompt_All() {
         return new AddressEntry(prompt_FirstName(), prompt_LastName(), prompt_Street(),
-                prompt_City(), prompt_State(), prompt_Zip(), prompt_Telephone(),
+                prompt_City(), prompt_State(), prompt_Zip(), prompt_Phone(),
                 prompt_Email());
     }
 
