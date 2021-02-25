@@ -105,8 +105,8 @@ public class AddressBook {
                 String c = scanner.nextLine(); // Read in city
                 String state = scanner.nextLine(); // Read in state
                 Integer z = Integer.valueOf(scanner.nextLine()); // Read in zip
-                String e = scanner.nextLine(); // Read in email
                 String p = scanner.nextLine(); // Read in phone
+                String e = scanner.nextLine(); // Read in email
 
                 // Create AddressEntry using read in information and add it to the AddressBook
                 AddressEntry entry = new AddressEntry(fn, ln, street, c, state, z, p, e);
