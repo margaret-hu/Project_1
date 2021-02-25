@@ -139,7 +139,7 @@ public class AddressBook {
             System.out.println("The following " + i + " entries were found in the address book " +
                     "for a last name starting with \"" + startOf_lastName + "\"");
             System.out.println(temp);
-        }
+        } else
         System.out.println("There were no entries were found in the address book " +
                 "for a last name starting with \"" + startOf_lastName + "\"");
     }
